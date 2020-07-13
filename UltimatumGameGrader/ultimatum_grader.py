@@ -13,6 +13,7 @@ class Player:
         self.strategy2 = strategy2
         self.full_name = first_name + " " + last_name
 
+
 def ultimatum_filepull(filename, split_amount):
     input_file = open(filename)
     player_list = []
@@ -24,14 +25,23 @@ def ultimatum_filepull(filename, split_amount):
         full_name = current_line[0].split(" ")
         first_name = full_name[0]
         last_name = full_name[1]
+
         # Get the student's strategy as Player 1
-        keep_amt = int(current_line[1][1])
-        offer_amt = int(split_amount) - keep_amt
+        # In an Ultimatum Game, there is a pot to be split, the value of which
+        # is kept in the parameter split_amount. Player 1 chooses the allocation,
+        # then issues Player 2 an "ultimatum" - take the deal or leave with nothing.
+        # If Player 2 rejects the allocation, Player 1 also leaves with nothing.
+        keep_amt = int(current_line[1][1])  # Amount Player 1 keeps for themselves
+        offer_amt = int(split_amount) - keep_amt  # Amount Player 1 offers to Player 1
         strategy1 = (keep_amt, offer_amt)
-        # Get the student's strategy as Player 2
+
+        # Get the student's strategy as Player 2. This is an array of whether to
+        # accept or reject offers in the form of (Player 1 payoff, Player 2 payoff),
+        # starting with (0, entire pot) and ending with (entire pot, 0).
         strategy2 = []
         for decision in current_line[2:]:
             strategy2.append(decision)
+
         # Now create the Player object for each student
         player_list.append(Player(first_name, last_name, strategy1, strategy2))
 
@@ -39,6 +49,7 @@ def ultimatum_filepull(filename, split_amount):
 
     player_list.sort(key=lambda x: x.last_name)
     return player_list
+
 
 def ultimatum_grader(player_list):
     graded_dict = {}
@@ -49,7 +60,7 @@ def ultimatum_grader(player_list):
         player_name = player_list[i].full_name
         as_player1 = player_list[i].strategy1
         as_player2 = player_list[i].strategy2
-        for j in range(i+1, len(player_list)):
+        for j in range(i + 1, len(player_list)):
             opponent = player_list[j].full_name
             opponent_player2 = player_list[j].strategy2
             opponent_player1 = player_list[j].strategy1
@@ -82,10 +93,12 @@ def ultimatum_grader(player_list):
             total2 = graded_dict[student][1]
             ave_dict[student] = (round(total1 / len(player_list), 2), round(total2 / len(player_list), 2))
 
-        #for student in ave_dict:
-            #result_list.append([student, ave_dict[student]])
-    #return result_list
+        # for student in ave_dict:
+        # result_list.append([student, ave_dict[student]])
+    # return result_list
     return ave_dict
+
+
 # Test to make sure this works
 # print(ultimatum_filepull("game_file.tsv", 4))
 
