@@ -1,6 +1,24 @@
 # Final Capstone
 
-This directory contains all of the starter projects for the final capstone. The Vue starter project works with both the Java and .NET backend projects with a single configuration update that you can read about in the README. Each project contains instructions that provides information about the starting code and explains how to get started with the final capstone project.
+This directory contains our web application for exploring and navigating San Diego by foot.
+Development Team: Yichen Z., Ellen M., Jeff M., Harry M.
+
+## Who This is For
+* The visitor: 
+  * Enjoy a self-guided walking tour of San Diego 
+  * No sinking a ton of time into research
+  * Room for spontaneity
+  * Keep track of trip locations for happy memories
+* The local:
+  * Discover new parts of their neighborhood and city by foot
+  * No need to plan
+* The virtual explorer:
+  * Zoom around San Diego on a curated tour of the top attractions
+  * Convenient maps and succinct details
+* Users who value their privacy and experience:
+  * Only you can see where you've been
+  * We do not track your location
+  * No fuss and no need to stay glued to your device - we get you there, and then you are free to enjoy the best that San Diego has to offer
 
 ## Overview
 
@@ -21,7 +39,7 @@ PostgreSQL
 
 References:
 * Longitude and latitude lookup: 
-  * https://www.latlong.net/place/san-diego-zoo-san-diego-ca-usa-26202.html
+  * https://www.latlong.net
   * Wikipedia
   * Google Maps
 
@@ -45,36 +63,38 @@ Vue
 
 Consumed APIs:
 * Backend server for in-house data
-* Mapbox for map functionality
+* Mapbox for map functionalities
 
 Pages:
-On every page (except login and register):
+On every page (except login, register, and profile):
   * SearchBar
     * CategoryIcon
   
 * Home
   * SearchBar
   * HomePage
-    * LocationsList
+    * ClosestMap - plot the user's location and 3 attractions closest to it
+    * LocationsList - 1) Randomly generated exploration suggestions; 2) List of all locations
       * LocationCard
         * CategoryIcon - return a row of categories the location belongs to
-* SearchBar
-  * CategoryIcon - return a row of all categories
+* SearchBar - enables search by name
+  * SelectableCategoryIconList - allows user to filter locations by their category; toggles between all lists and filter
+    * CategoryIcon - return a row of all categories
 * Results
   * SearchBar
-  * LocationsList
-  * LocationMap
+  * LocationsList - returns list of all locations that match the search query by name
+  * LocationMap - plots each result
 * LocationDetails
   * LocationHours - returns info on hours
   * CategoryIconList - fills in all category icons
   * SingleDestination - provides map with directions
 * Profile
   * UserDetails
-    * BadgeShelf - earned & unearned
-      * BadgeIcon
+    * BadgeShelf
+      * BadgeIcon - achieved badges are in full color; badges yet to be achieved are grayed out
     * CheckinContainer
-      * CheckinCard
-        * LocationCard
+      * CheckinCard - includes date of check-in
+        * LocationCard - includes basic details of the location, cannot be clicked
 
 ### Image sources
 
