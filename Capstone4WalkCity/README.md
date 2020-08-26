@@ -22,6 +22,25 @@ Development Team: Yichen Z., Ellen M., Jeff M., Harry M.
 
 ## Overview
 
+### Screenshots
+
+Log In
+
+![login-page](./login-page.PNG)
+
+Home Landing Page
+
+![home-page](./home-page.PNG)
+
+Location Details Page
+
+![details-1](./details-1.PNG)
+![details-2](./details-2.PNG)
+
+User Profile Page
+
+![user-profile](./user-profile.PNG)
+
 ### Getting Started
 
 * Make sure to run Schema.sql before looking at the most current version of the code
