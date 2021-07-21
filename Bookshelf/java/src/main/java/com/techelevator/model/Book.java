@@ -16,6 +16,16 @@ public class Book {
 	private Map<Tag, Integer> tags;
 	
 	/**
+	 * Most basic constructor
+	 * @param title
+	 * @param publishYear
+	 */
+	public Book(String title, int publishYear){
+		this.title = title;
+		this.year = publishYear;
+	}
+	
+	/**
 	 * Book Constructor without bookID for database to designate
 	 * @param title
 	 * @param publishYear
@@ -27,6 +37,18 @@ public class Book {
 		this.year = publishYear;
 		this.authors = bookAuthors;
 		this.tags = bookLabels;
+	}
+	
+	/**
+	 * Book Constructor without authors or tags
+	 * @param bookID
+	 * @param title
+	 * @param publishYear
+	 */
+	public Book(int bookID, String bookTitle, int publishYear) {
+		this.bookID = bookID;
+		this.title = bookTitle;
+		this.year = publishYear;
 	}
 	
 	/**
