@@ -1,11 +1,14 @@
 package com.techelevator.dao.implementations;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
@@ -24,22 +27,28 @@ public class BookSqlDAO implements BookDAO {
 
 	@Override
 	public List<Book> getAllBooks() {
-		String sqlBooks = "SELECT book_id, title, year FROM books";
+		String sqlBooks = "SELECT * FROM books";
 		SqlRowSet results = template.queryForRowSet(sqlBooks);
-		return mapResultsToBooks(results);
+		readList = mapResultsToBooks(results);
+		return readList;
 	}
 
 	@Override
 	public Book get(int id) {
-		String sqlFetchBook = "SELECT title, year FROM books WHERE book_id = ?";
+		Book retrievedBook = new Book("Default Title", 2021);
+		String sqlFetchBook = "SELECT * FROM books WHERE book_id = ?";
+		
 		SqlRowSet result = template.queryForRowSet(sqlFetchBook, id);
-		return mapRowToBook(result);
+		if(result.next()) {
+			retrievedBook = mapRowToBook(result);
+		}
+		return retrievedBook;
 	}
 
 	@Override
 	public boolean createBook(Book newBook) {
-		// TODO Auto-generated method stub
-		return false;
+		String sqlAddBook = "INSERT INTO books (title, year) VALUES (?, ?)";
+		return template.update(sqlAddBook, newBook.getTitle(), newBook.getYear()) != 0;
 	}
 	
 	/**
@@ -48,7 +57,8 @@ public class BookSqlDAO implements BookDAO {
 	 * @return
 	 */
 	private Book mapRowToBook(SqlRowSet result) {
-		return new Book(result.getInt("book_id"), result.getString("title"), result.getInt("year"));
+		Book retrievedBook = new Book(result.getInt("book_id"), result.getString("title"), result.getInt("year"));
+		return retrievedBook;
 	}
 	
 	private List<Book> mapResultsToBooks(SqlRowSet results){

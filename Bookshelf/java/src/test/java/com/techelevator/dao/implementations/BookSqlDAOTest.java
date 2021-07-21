@@ -1,6 +1,7 @@
 package com.techelevator.dao.implementations;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public class BookSqlDAOTest extends DAOIntegrationTest {
 	private BookDAO bookDao;
 	private List<Book> results;
 	private Book newBook;
+	private final String TEST_TITLE = "Test Test Test Best Book Ever";
+	private final int TEST_PUBLICATION_YEAR = 2000;
+	private final String FIRST_BOOK = "Lightseekers";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -39,6 +43,7 @@ public class BookSqlDAOTest extends DAOIntegrationTest {
 		jdbcTemplate = new JdbcTemplate(getDataSource());
 		bookDao = new BookSqlDAO(getDataSource());
 		results = new ArrayList<Book>();
+		newBook = new Book(TEST_TITLE, TEST_PUBLICATION_YEAR);
 	}
 
 	@After
@@ -57,15 +62,35 @@ public class BookSqlDAOTest extends DAOIntegrationTest {
 		results = bookDao.getAllBooks();
 		assertEquals(bookCount, results.size());
 	}
-
-	@Test
-	public void test_Get_book_by_ID() {
-		fail("Not yet implemented");
-	}
-
+	
 	@Test
 	public void test_Create_book() {
-		fail("Not yet implemented");
+		results = bookDao.getAllBooks();
+		int countBefore = results.size();
+		
+		assertTrue(bookDao.createBook(newBook));
+		
+		results = bookDao.getAllBooks();
+		int countAfter = results.size();
+		
+		assertEquals(countBefore + 1, countAfter);
 	}
-
+	
+	@Test
+	public void test_Get_book_by_ID() {
+//		assertEquals(FIRST_BOOK, bookDao.get(1).getTitle());
+		bookDao.createBook(newBook);
+		results = bookDao.getAllBooks();
+		int id = -1;
+		for (Book book : results) {
+			if (book.equals(newBook))
+				id = book.getBookID();
+		}
+		
+		try {
+			assertEquals(newBook, bookDao.get(id));
+		} catch(Exception e) {
+			fail("Failed with exception " + e.getMessage());
+		}
+	}
 }

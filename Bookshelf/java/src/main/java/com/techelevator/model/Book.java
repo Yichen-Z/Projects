@@ -129,8 +129,7 @@ public class Book {
 			return false;
 		} else {
 			Book otherBook = (Book)o;
-			return (this.bookID == otherBook.getBookID() &&
-					this.title.equalsIgnoreCase(otherBook.getTitle()) &&
+			return (this.title.equalsIgnoreCase(otherBook.getTitle()) &&
 					this.year == otherBook.getYear());
 		}
 	}
