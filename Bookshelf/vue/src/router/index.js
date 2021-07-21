@@ -6,7 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import About from '@/views/About.vue'
-import Book from '@/components/Book.vue'
+import ReadList from '@/views/ReadList.vue'
 
 Vue.use(Router)
 
@@ -66,7 +66,7 @@ const router = new Router({
     {
       path: "/books",
       name: "books",
-      component: Book,
+      component: ReadList,
       meta: {
         requiresAuth: false
       }

@@ -19,7 +19,9 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    activeBook: '',
+    bookList: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +39,13 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    SET_ACTIVE_BOOK(state, bookID) {
+      state.activeBook = bookID;
+    },
+    SET_BOOKLIST(state, data) {
+      state.bookList = data;
     }
-  }
+  },
+  strict: true
 })
