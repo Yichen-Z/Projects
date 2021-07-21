@@ -18,16 +18,26 @@ This keeps track of books I have read in better detail.
 
 ### Server
 Additional endpoints
-    * `/welcome` landing page (recommendation by title, tags, books)
-    * `/tags` (GET, POST tags)
-    * `/books/${bookID}/tags` (GET, DELETE tags by book ID)
-    * `/books/${bookID}/tags/${tagID}` (GET, DELETE tag by tag ID)
-    * `/tags/books` (GET books that have the same tag)
+* `/welcome` landing page (recommendation by title, tags, books)
+* `/tags` (GET, POST tags)
+* `/books/${bookID}/tags` (GET, DELETE tags by book ID)
+* `/books/${bookID}/tags/${tagID}` (GET, DELETE tag by tag ID)
+* `/tags/books` (GET books that have the same tag)
 
 ### Database
 ![Bookshelf Entity Relationship Diagram](./BookshelfERD.png)
 
 ### UI
+Install dependencies
+```
+npm install
+```
+
+See live version
+```
+npm run serve
+```
+
 
 ## Next Steps
 
