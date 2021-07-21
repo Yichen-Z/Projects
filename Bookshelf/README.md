@@ -7,7 +7,14 @@ This keeps track of books I have read in better detail.
 
 ## Minimum Viable Product
 * Java API server
-    * Endpoints
+    * Endpoints:
+        * `/welcome` landing page (recommendation by title, tags, books)
+        * `/books` (GET, POST books)
+        * `/books/${bookID}` (GET, PUT, DELETE books by book ID)
+        * `/tags` (GET, POST tags)
+        * `/books/${bookID}/tags` (GET, DELETE tags by book ID)
+        * `/books/${bookID}/tags/${tagID}` (GET, DELETE tag by tag ID)
+        * `/tags/books` (GET books that have the same tag)
     * Unit Tests: JUnit 4
 * PostgreSQL database: bookshelf
 * Vue front-end client
